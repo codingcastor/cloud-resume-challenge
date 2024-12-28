@@ -1,4 +1,4 @@
-# Cloud Resume Challenge
+# Cloud Resume Challenge [![CI/CD Pipeline](https://github.com/codingcastor/cloud-resume-challenge/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/codingcastor/cloud-resume-challenge/actions/workflows/main.yml)
 
 This monorepo contains the implementation of the Cloud Resume Challenge, showcasing cloud architecture and DevOps practices.
 
