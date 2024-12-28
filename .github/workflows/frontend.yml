@@ -38,11 +38,11 @@ jobs:
       run: mkdir dist && cp -r scripts dist/ && cp -r styles dist/ && cp index.html dist/
 
     - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: frontend-artifact
-          path: frontend/dist
-          retention-days: 1
+      uses: actions/upload-artifact@v3
+      with:
+        name: frontend-artifact
+        path: frontend/dist
+        retention-days: 1
 
     - name: Upload to S3
       run: |
