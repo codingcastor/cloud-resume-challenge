@@ -1,7 +1,7 @@
 variable "aws_region" {
   description = "AWS region"
   type        = string
-  default     = "us-east-1"  # Free tier is most widely available in us-east-1
+  default     = "us-east-1" # Free tier is most widely available in us-east-1
 }
 
 variable "project_name" {

@@ -2,14 +2,15 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.0"
+      version = "~> 5.82"
     }
   }
   required_version = ">= 1.0.0"
 }
 
 provider "aws" {
-  region = var.aws_region
+  region  = var.aws_region
+  profile = "personal"
 }
 
 # S3 bucket for website hosting
@@ -54,10 +55,10 @@ resource "aws_s3_bucket_policy" "website" {
 
 # DynamoDB table for visitor counter
 resource "aws_dynamodb_table" "visitor_counter" {
-  name           = "${var.project_name}-${var.environment}-visitors"
-  billing_mode   = "PAY_PER_REQUEST"  # Free tier eligible
-  hash_key       = "id"
-  
+  name         = "${var.project_name}-${var.environment}-visitors"
+  billing_mode = "PAY_PER_REQUEST" # Free tier eligible
+  hash_key     = "id"
+
   attribute {
     name = "id"
     type = "S"
@@ -66,11 +67,11 @@ resource "aws_dynamodb_table" "visitor_counter" {
 
 # Lambda function for API
 resource "aws_lambda_function" "api" {
-  filename         = "../backend/function.zip"
-  function_name    = "${var.project_name}-${var.environment}-api"
-  role            = aws_iam_role.lambda_role.arn
-  handler         = "handler.lambda_handler"
-  runtime         = "python3.9"
+  filename      = "../backend/function.zip"
+  function_name = "${var.project_name}-${var.environment}-api"
+  role          = aws_iam_role.lambda_role.arn
+  handler       = "handler.lambda_handler"
+  runtime       = "python3.12"
 
   environment {
     variables = {
