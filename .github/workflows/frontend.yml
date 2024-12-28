@@ -43,12 +43,3 @@ jobs:
         name: frontend-artifact
         path: frontend/dist
         retention-days: 1
-
-    - name: Upload to S3
-      run: |
-        aws s3 sync . s3://${{ secrets.S3_BUCKET }} \
-          --exclude "*" \
-          --include "index.html" \
-          --include "styles/*" \
-          --include "scripts/*" \
-          --delete
