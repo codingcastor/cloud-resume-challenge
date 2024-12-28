@@ -6,7 +6,11 @@ terraform {
     }
   }
   required_version = ">= 1.0.0"
-  backend          = "local"
+  backend "s3" {
+    bucket = "terraform"
+    key    = "cloud-resume.tfstate"
+    region = "us-east-1"
+  }
 }
 
 provider "aws" {
