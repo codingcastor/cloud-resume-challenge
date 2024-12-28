@@ -19,8 +19,6 @@ yarn-error.log*
 
 # Terraform
 .terraform/
-*.tfstate
-*.tfstate.*
 *.tfvars
 !terraform.tfvars.example
 .terraformrc
