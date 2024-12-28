@@ -10,7 +10,6 @@ terraform {
 
 provider "aws" {
   region  = var.aws_region
-  profile = "personal"
 }
 
 # S3 bucket for website hosting
