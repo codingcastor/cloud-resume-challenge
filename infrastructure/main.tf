@@ -7,7 +7,7 @@ terraform {
   }
   required_version = ">= 1.0.0"
   backend "s3" {
-    bucket = "terraform"
+    bucket = "cloud-resume-challenge-terraform"
     key    = "cloud-resume.tfstate"
     region = "us-east-1"
   }
