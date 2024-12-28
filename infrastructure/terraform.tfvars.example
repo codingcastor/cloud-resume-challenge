@@ -1,0 +1,4 @@
+aws_region   = "us-east-1"
+project_name = "cloud-resume"
+environment  = "dev"
+domain_name  = "example.com"
