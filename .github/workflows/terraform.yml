@@ -31,7 +31,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: frontend-artifact
-        path: frontend/dist
+        path: frontend
 
     - name: Download backend artifact
       uses: actions/download-artifact@v4
@@ -74,4 +74,4 @@ jobs:
     - name: Upload frontend to S3
       if: success()
       run: |
-        aws s3 sync frontend/dist s3://${var.project_name}-${var.environment}-website/
+        aws s3 sync frontend s3://${var.project_name}-${var.environment}-website/
