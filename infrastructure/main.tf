@@ -74,7 +74,7 @@ resource "aws_lambda_function" "api" {
   filename      = "../backend/function.zip"
   function_name = "${var.project_name}-${var.environment}-api"
   role          = aws_iam_role.lambda_role.arn
-  handler       = "handler.lambda_handler"
+  handler       = "handler.handler"
   runtime       = "python3.12"
 
   logging_config {
