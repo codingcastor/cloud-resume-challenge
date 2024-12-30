@@ -59,7 +59,7 @@ resource "aws_iam_role_policy" "lambda_dynamodb_policy" {
 resource "aws_iam_role_policy" "lambda_cloudwatch_policy" {
   name = "${local.name_prefix}-lambda-cloudwatch-policy"
   role = aws_iam_role.lambda_role.id
-  
+
   policy = jsonencode({
     Statement = [
       {

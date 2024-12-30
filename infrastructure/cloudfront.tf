@@ -4,7 +4,7 @@ import {
 }
 
 resource "aws_acm_certificate" "cert" {
-  domain_name       = "codingcastor.com"
+  domain_name = "codingcastor.com"
 
   lifecycle {
     create_before_destroy = true
@@ -33,8 +33,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   aliases = ["codingcastor.com", "www.codingcastor.com"]
 
   default_cache_behavior {
-    allowed_methods = ["GET", "HEAD", "OPTIONS"]
-    cached_methods = ["GET", "HEAD", "OPTIONS"]
+    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
+    cached_methods   = ["GET", "HEAD", "OPTIONS"]
     target_origin_id = aws_s3_bucket.website.bucket
 
     forwarded_values {
@@ -54,9 +54,9 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn = aws_acm_certificate.cert.arn
+    acm_certificate_arn      = aws_acm_certificate.cert.arn
     minimum_protocol_version = "TLSv1.2_2021"
-    ssl_support_method = "sni-only"
+    ssl_support_method       = "sni-only"
   }
 
   restrictions {
@@ -72,15 +72,15 @@ data "aws_iam_policy_document" "cloudfront_oac_access" {
   statement {
     principals {
       identifiers = ["cloudfront.amazonaws.com"]
-      type = "Service"
+      type        = "Service"
     }
 
-    actions = ["s3:GetObject"]
+    actions   = ["s3:GetObject"]
     resources = ["${aws_s3_bucket.website.arn}/*"]
 
     condition {
       test     = "StringEquals"
-      values = [aws_cloudfront_distribution.s3_distribution.arn]
+      values   = [aws_cloudfront_distribution.s3_distribution.arn]
       variable = "AWS:SourceArn"
     }
   }

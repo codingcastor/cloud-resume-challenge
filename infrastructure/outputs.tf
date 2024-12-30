@@ -5,7 +5,7 @@ output "website_url" {
 
 output "cloufront_url" {
   description = "CloudFront website URL"
-  value = aws_cloudfront_distribution.s3_distribution.domain_name
+  value       = aws_cloudfront_distribution.s3_distribution.domain_name
 }
 
 output "api_endpoint" {
