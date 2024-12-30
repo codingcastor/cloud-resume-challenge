@@ -123,6 +123,24 @@ resource "aws_iam_role_policy" "lambda_dynamodb_policy" {
   })
 }
 
+# IAM policy for Lambda to access CloudWatch
+resource "aws_iam_role_policy" "lambda_cloudwatch_policy" {
+  name = "${var.project_name}-${var.environment}-lambda-cloudwatch-policy"
+  role = aws_iam_role.lambda_role.id
+  policy = jsonencode({
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Resource = aws_cloudwatch_log_group.cloud_resume_challenge_log_group.arn
+    }]
+  })
+}
+
 # API Gateway
 resource "aws_apigatewayv2_api" "api" {
   name          = "${var.project_name}-${var.environment}-api"
@@ -160,4 +178,9 @@ resource "aws_lambda_permission" "api" {
   function_name = aws_lambda_function.api.function_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_apigatewayv2_api.api.execution_arn}/*/*"
+}
+
+resource "aws_cloudwatch_log_group" "cloud_resume_challenge_log_group" {
+  name              = "cloud-resume-challenge-log-group"
+  retention_in_days = 1
 }

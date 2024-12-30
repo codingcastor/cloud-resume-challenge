@@ -35,3 +35,8 @@ Each component has its own README with specific setup instructions.
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+# TODO
+- CloudFront for HTTPS
+- JS to call API Gateway
+- DNS from codingcastor.com
