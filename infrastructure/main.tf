@@ -77,6 +77,11 @@ resource "aws_lambda_function" "api" {
   handler       = "handler.lambda_handler"
   runtime       = "python3.12"
 
+  logging_config {
+    log_format = "Text"
+    log_group  = aws_cloudwatch_log_group.cloud_resume_challenge_log_group.id
+  }
+
   environment {
     variables = {
       DYNAMODB_TABLE = aws_dynamodb_table.visitor_counter.name
