@@ -126,6 +126,7 @@ jobs:
         echo 'project_name = "${{ vars.PROJECT_NAME }}"' >> terraform.tfvars
         echo 'environment = "${{ vars.ENVIRONMENT }}"' >> terraform.tfvars
         echo 'domain_name = "${{ vars.DOMAIN_NAME }}"' >> terraform.tfvars
+        echo 'cert_arn = "${{ vars.CERT_ARN }}"' >> terraform.tfvars
 
     - name: Terraform Plan
       run: terraform plan -input=false

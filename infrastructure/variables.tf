@@ -20,3 +20,8 @@ variable "domain_name" {
   description = "Domain name for the website"
   type        = string
 }
+
+variable "cert_arn" {
+  description = "ARN of Certificate"
+  type        = string
+}
