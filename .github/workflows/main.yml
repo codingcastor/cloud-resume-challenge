@@ -138,7 +138,7 @@ jobs:
     - name: Upload frontend to S3
       if: success()
       run: |
-        aws s3 sync . s3://${{ secrets.S3_BUCKET }} \
+        aws s3 sync frontend s3://${{ secrets.S3_BUCKET }} \
           --exclude "*" \
           --include "index.html" \
           --include "styles/*" \
