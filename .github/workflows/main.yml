@@ -115,12 +115,15 @@ jobs:
         terraform_version: "1.10.3"
 
     - name: Terraform Init
+      working-directory: ./infrastructure
       run: terraform init
 
     - name: Terraform Format
+      working-directory: ./infrastructure
       run: terraform fmt -check
 
     - name: Create terraform.tfvars
+      working-directory: ./infrastructure
       run: |
         echo 'aws_region = "${{ secrets.AWS_REGION }}"' > terraform.tfvars
         echo 'project_name = "${{ vars.PROJECT_NAME }}"' >> terraform.tfvars
@@ -129,16 +132,19 @@ jobs:
         echo 'cert_arn = "${{ secrets.CERT_ARN }}"' >> terraform.tfvars
 
     - name: Terraform Plan
+      working-directory: ./infrastructure
       run: terraform plan -input=false
       
     - name: Terraform Apply
+      working-directory: ./infrastructure
       if: github.ref == 'refs/heads/main'
       run: terraform apply -auto-approve -input=false
 
     - name: Upload frontend to S3
       if: success()
+      working-directory: ./frontend
       run: |
-        aws s3 sync frontend s3://${{ secrets.S3_BUCKET }} \
+        aws s3 sync . s3://${{ secrets.S3_BUCKET }} \
           --exclude "*" \
           --include "index.html" \
           --include "styles/*" \
